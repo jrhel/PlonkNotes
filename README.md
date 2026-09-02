@@ -50,7 +50,7 @@ flask run
 6) The user interface for the application may now be opened, in your browser, with the address specified in your terminal.
 
 ## Shutting down the application
-1) In your terminal, shut down the application by pressing ctrl + c.
+1) In your terminal, shut down the application by pressing <kbd>ctrl<kbd> + <kbd>c<kbd>.
 2) Deactivate the virtual environment, with the command:
 ```
 deactivate
