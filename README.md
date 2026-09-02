@@ -24,7 +24,7 @@ PlonkNotes is a web application for making &amp; saving notes about wines, and c
 ## Installation instructions:
 1) In your terminal, navigate to the directory in which you want to install the application and download it, with the command:
 ```
-git clone git@github.com:jrhel/PlonkNOTes.git
+git clone git@github.com:jrhel/PlonkNotes.git
 ```
 2) Set up a virtual environment for the application, with the command:
 ```
