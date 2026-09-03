@@ -26,7 +26,7 @@ PlonkNotes is a web application for making &amp; saving notes about wines, and c
 ```
 git clone git@github.com:jrhel/PlonkNotes.git
 ```
-2) Set up a virtual environment for the application, with the command:
+2) In the downloaded directory "PlonkNotes", set up a virtual environment for the application, with the command:
 ```
 python3 -m venv venv
 ```
