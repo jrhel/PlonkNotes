@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Front page</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+
+  <body>
+    <h1>Welcome to PlonkNotes!</h1>
+    {% if message %}
+      <p class = "message">
+        {{ message }}
+      </p>
+    {% endif %}
+    <form action="/sign_in" method="post">
+      <fieldset>
+      <legend>Log in</legend>
+        <p>
+          <label for="username">Username:</label>
+          <input type="text" id="username", name="username"/>
+        </p>
+        <p>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password"/>
+        </p>
+        <p>
+          <input type="submit" value="Log in" />
+        </p>
+      </fieldset>
+    </form>
+    <a href="sign_up">Sign up</a>
+  </body>
+
+</html>

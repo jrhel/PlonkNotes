@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>User page</title>
+  </head>
+
+  <body>
+    <h1>Hello {{ session.username}}!</h1>
+    
+    <form action="/sign_out" method="post">
+      <input type="submit" value="Log out" />
+    </form>
+  </body>
+
+</html>

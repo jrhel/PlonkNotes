@@ -1,0 +1,16 @@
+header {
+
+}
+
+body {
+    
+}
+
+.message {
+    display: inline-block;
+    margin-left: 1em;
+    margin-top: 0em;
+    border-radius: 0.5em;
+    background-color: pink;
+    padding: 1em;
+}
