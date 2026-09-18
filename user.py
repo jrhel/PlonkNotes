@@ -19,3 +19,20 @@ def create_user(username: str, password: str):
     params = [username, password_hash]
     db_connection_handler.execute("INSERT INTO User (username, password_hash) VALUES (?, ?)", params)
     # ! Needs to verify creation !
+
+def verify_user(username: str, password: str):
+    user_info = get_user(username)
+    if user_info is None:
+        return False
+    if check_password_hash(user_info["password_hash"], password):
+        return True
+    else:
+        return False    
+
+def get_user(username: str):
+    params = [username]
+    result = db_connection_handler.query("SELECT * FROM User WHERE username = ?", params)
+    if len(result) == 0:
+        return None
+    else:
+        return result[0]

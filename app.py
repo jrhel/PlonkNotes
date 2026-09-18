@@ -7,6 +7,8 @@ from flask import request
 import user
 import db_connection_handler
 
+# ! Fix render -> redirect !
+
 app = Flask(__name__)
 db_connection_handler.verify_database()
 # ! Fix secret key !
@@ -44,6 +46,19 @@ def create_account():
     else:
         availability_message = f"The username {username} is not available. Please, try another one!"
         return render_template("sign_up.html", message = availability_message)
+
+@app.route("/sign_in", methods=["POST"])
+# The function obtains the given username & password from the sign-in page, verifies that they are correct, and redirects the user to their user page.
+# If the username or password was not correct, the user is redirected back to the login page with the message that they were not correct.
+def sign_in():
+    username = request.form["username"]
+    password = request.form["password"]
+    if user.verify_user(username, password):
+        session["username"] = username
+        return redirect("/user_page")
+    else:
+        return render_template("index.html", message = "The username or password was incorrect!")
+
 
 @app.route("/user_page")
 def user_page():
