@@ -1,6 +1,6 @@
 # PlonkNotes
 PlonkNotes is a web application for making &amp; saving notes about wines, and crowdsourcing experiences of them. A user will be able to:
-- create an account & sign in & out of the application,
+- create an account & sign in & out of the application, :heavy_check_mark:
 - make their own wine-specific notes, including;
   - aroma description,
   - taste description,
