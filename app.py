@@ -10,7 +10,7 @@ import db_connection_handler
 app = Flask(__name__)
 db_connection_handler.verify_database()
 # ! Fix secret key !
-app.secret_key = "18fd24bf6a2ad4dac04a33963db1c42f"
+app.secret_key = config.get_session_key()
 
 # The user is rendered the landing page, from where they can log in or sign up, unless they are already signed in, in which case they get redirected to their own user page.
 @app.route("/")
