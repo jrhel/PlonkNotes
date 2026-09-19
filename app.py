@@ -3,13 +3,13 @@ from flask import session
 from flask import render_template
 from flask import redirect
 from flask import request
-import user
+import config
 import db_connection_handler
+import user
 
 
 app = Flask(__name__)
 db_connection_handler.verify_database()
-# ! Fix secret key !
 app.secret_key = config.get_session_key()
 
 # The user is rendered the landing page, from where they can log in or sign up, unless they are already signed in, in which case they get redirected to their own user page.
