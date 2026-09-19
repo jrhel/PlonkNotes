@@ -3,11 +3,9 @@ from flask import session
 from flask import render_template
 from flask import redirect
 from flask import request
-
 import user
 import db_connection_handler
 
-# ! Fix render -> redirect !
 
 app = Flask(__name__)
 db_connection_handler.verify_database()
@@ -20,36 +18,42 @@ def index():
     if "username" in session.keys():
         return redirect("/user_page")
     else:
-        return render_template("index.html")
+        potential_error_message = session.pop("message", None)
+        return render_template("index.html", message = potential_error_message)
 
 @app.route("/sign_up")
 def sign_up():
-    return render_template("sign_up.html")
+    potential_error_message = session.pop("message", None)
+    return render_template("sign_up.html", message = potential_error_message)
 
-@app.route("/create_account", methods=["POST"])
 # The function verifies that the passwords entered on the sign-up page match each other, that the username is not taken, and that all three fields were filled in.
 # If not, the sign-up page is rendered again with a message of what went wrong.
 # Otherwise, the user information is passed on to the application logic, which handles signing up the user, who is then redirected to their own user page.
+@app.route("/create_account", methods=["POST"])
 def create_account():
     username = request.form["username"]
     password1 = request.form["password1"]
     password2 = request.form["password2"]
-    # ! Check to set message separately in session, then redirect to "/" !
     if not username or not password1 or not password2:
-        return render_template("sign_up.html", message = "One or more fields were ampty. Please, make sure to fill in all the fields!")
+        error_message = "One or more fields were ampty. Please, make sure to fill in all the fields!"
+        session["message"] = error_message
+        return redirect("/sign_up")
     if password1 != password2:
-        return render_template("sign_up.html", message = "Sorry, the passwords didn't match. Please, try again!")
+        error_message = "Sorry, the passwords didn't match. Please, try again!"
+        session["message"] = error_message
+        return redirect("/sign_up")
     elif user.check_available_username(username):
         user.create_user(username, password1)
         session["username"] = username
         return redirect("/user_page")
     else:
-        availability_message = f"The username {username} is not available. Please, try another one!"
-        return render_template("sign_up.html", message = availability_message)
+        error_message = f"The username {username} is not available. Please, try another one!"
+        session["message"] = error_message
+        return redirect("/sign_up")
 
-@app.route("/sign_in", methods=["POST"])
 # The function obtains the given username & password from the sign-in page, verifies that they are correct, and redirects the user to their user page.
 # If the username or password was not correct, the user is redirected back to the login page with the message that they were not correct.
+@app.route("/sign_in", methods=["POST"])
 def sign_in():
     username = request.form["username"]
     password = request.form["password"]
@@ -57,7 +61,9 @@ def sign_in():
         session["username"] = username
         return redirect("/user_page")
     else:
-        return render_template("index.html", message = "The username or password was incorrect!")
+        error_message = "The username or password was incorrect!"
+        session["message"] = error_message
+        return redirect("/")
 
 
 @app.route("/user_page")
