@@ -77,24 +77,32 @@ def create_wine():
 @app.route("/new_wine", methods=["GET", "POST"])
 def new_wine():
     this_producer = request.form["producer"]
-    print(this_producer)
     this_appellation = request.form["appellation"]
     this_country = request.form["country"]
     this_main_region = request.form["main_region"]
+    
     these_subregions = []
     for region in request.form.getlist("subregion"):
         these_subregions.append(region)
+    this_name = request.form["name"]
 
-    print(these_subregions)
+    these_varieties = []
+    for variety in request.form.getlist("grape"):
+        these_varieties.append(variety)
 
     this_name = request.form["name"]
 
     action = request.form.get("action")
     if action == "Save":
+        # ! ! Save to database ! !
         return redirect("/user_page")
+    elif action == "+ Add a variety":
+        these_varieties.append("")
+        return render_template("create_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name, varieties = these_varieties)
     else:        
-        these_subregions.append("!")
-        return render_template("create_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name)
+        these_subregions.append("")
+        # ! ! Change this to a redirect ! !
+        return render_template("create_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name, varieties = these_varieties)
 
 @app.route("/sign_out", methods=["POST"])
 def sign_out():

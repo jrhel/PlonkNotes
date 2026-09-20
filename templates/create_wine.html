@@ -27,7 +27,7 @@
                 </p>
                 {% for region in subregions %}
                 <p>
-                    <label for="subregion{{ loop.index }}">Subregion {{ loop.index }}:</label>
+                    <label for="subregion{{ loop.index }}">└ Subregion {{ loop.index }}:</label>
                     <input type="text" id="subregion{{ loop.index }}" name="subregion" value="{{ region }}"/>
                 </p>
                 {% endfor %}
@@ -36,6 +36,13 @@
                     <label for="name">Name/Cuvée/parcel:</label>
                     <input type="text" id="name" name="name" value="{{ name }}"/>
                 </p>
+                <div>
+                    <label for="varieties">Grape varieties:</label>
+                    {% for variety in varieties %}
+                    <input type="text" id="variety{{ loop.index }}" name="grape" value="{{ variety }}"/>
+                    {% endfor %}
+                    <input type ="submit" name="action" value="+ Add a variety">
+                </div>                
                 <input type ="submit" name="action" value="Save">
             </fieldset>
         </form>
