@@ -70,6 +70,32 @@ def sign_in():
 def user_page():
     return render_template("user.html")
 
+@app.route("/create_wine")
+def create_wine():
+    return render_template("create_wine.html")
+
+@app.route("/new_wine", methods=["GET", "POST"])
+def new_wine():
+    this_producer = request.form["producer"]
+    print(this_producer)
+    this_appellation = request.form["appellation"]
+    this_country = request.form["country"]
+    this_main_region = request.form["main_region"]
+    these_subregions = []
+    for region in request.form.getlist("subregion"):
+        these_subregions.append(region)
+
+    print(these_subregions)
+
+    this_name = request.form["name"]
+
+    action = request.form.get("action")
+    if action == "Save":
+        return redirect("/user_page")
+    else:        
+        these_subregions.append("!")
+        return render_template("create_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name)
+
 @app.route("/sign_out", methods=["POST"])
 def sign_out():
     session.clear()

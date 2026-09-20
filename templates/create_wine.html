@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>New wine</title>
+  </head>
+
+    <body>
+        <form action="/new_wine" method="post">
+            <fieldset>
+            <legend>Enter the details applicable to the wine:</legend>
+                <p>
+                    <label for="producer">Producer:</label>
+                    <input type="text" id="producer" name="producer" value="{{ producer }}"/>
+                </p>
+                <p>
+                    <label for="appellation">Appelation:</label>
+                    <input type="text" id="appellation" name="appellation" value="{{ appellation }}"/>
+                </p>
+                <p>
+                    <label for="country">Country:</label>
+                    <input type="text" id="country" name="country" value="{{ country }}"/>
+                </p>
+                <p>
+                    <label for="main_region">Region:</label>
+                    <input type="text" id="main_region" name="main_region" value="{{ main_region }}"/>
+                </p>
+                {% for region in subregions %}
+                <p>
+                    <label for="subregion{{ loop.index }}">Subregion {{ loop.index }}:</label>
+                    <input type="text" id="subregion{{ loop.index }}" name="subregion" value="{{ region }}"/>
+                </p>
+                {% endfor %}
+                <input type ="submit" name="action" value="└ Add a subregion">
+                <p>
+                    <label for="name">Name/Cuvée/parcel:</label>
+                    <input type="text" id="name" name="name" value="{{ name }}"/>
+                </p>
+                <input type ="submit" name="action" value="Save">
+            </fieldset>
+        </form>
+    </body>
+
+</html>
