@@ -38,11 +38,16 @@
                 </p>
                 <div>
                     <label for="varieties">Grape varieties:</label>
+                    # ! ! Add first field + app functionality for it ! !
                     {% for variety in varieties %}
                     <input type="text" id="variety{{ loop.index }}" name="grape" value="{{ variety }}"/>
                     {% endfor %}
                     <input type ="submit" name="action" value="+ Add a variety">
-                </div>                
+                </div>
+                <p>
+                    <label for="type">Type:</label>
+                    <input type="text" id="type" name="type" value='e.g. "Red"/"White"/"Rosé" etc.'/>
+                </p>
                 <input type ="submit" name="action" value="Save">
             </fieldset>
         </form>
