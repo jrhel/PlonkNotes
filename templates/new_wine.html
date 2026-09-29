@@ -6,9 +6,9 @@
   </head>
 
     <body>
-        <form action="/new_wine" method="post">
+        <form action="/create_wine" method="post">
             <fieldset>
-            <legend>Enter the details applicable to the wine:</legend>
+            <legend>Enter applicable details about the wine:</legend>
                 <p>
                     <label for="producer">Producer:</label>
                     <input type="text" id="producer" name="producer" value="{{ producer }}"/>
@@ -37,17 +37,22 @@
                     <input type="text" id="name" name="name" value="{{ name }}"/>
                 </p>
                 <div>
-                    <label for="varieties">Grape varieties:</label>
-                    # ! ! Add first field + app functionality for it ! !
+                    <label for="varieties">Grape varieties:</label>                    
+                    <input type="text" id="main_variety" name="main_grape" value="{{ main_variety }}">
+                    <!--  ! ! Add first field + app functionality for it ! ! --> 
                     {% for variety in varieties %}
                     <input type="text" id="variety{{ loop.index }}" name="grape" value="{{ variety }}"/>
                     {% endfor %}
                     <input type ="submit" name="action" value="+ Add a variety">
                 </div>
-                <p>
-                    <label for="type">Type:</label>
-                    <input type="text" id="type" name="type" value='e.g. "Red"/"White"/"Rosé" etc.'/>
-                </p>
+                <div>
+                    <label for="types">Type:</label>
+                    <input type="text" id="main_tag" name="main_type" placeholder="E.g. Red / White / Rosé / Biodynamic etc." value="{{ main_tag }}"/>
+                    {% for tag in tags %}
+                    <input type="text" id="tag{{ loop.index }}" name="type" placeholder="E.g. Red / White / Rosé / Biodynamic etc." value="{{ tag }}"/>
+                    {% endfor %}
+                    <input type ="submit" name="action" value="+ Add a type or other tag">
+                </div>
                 <input type ="submit" name="action" value="Save">
             </fieldset>
         </form>
