@@ -47,7 +47,7 @@ python3 -m venv venv
 ```
 flask run
 ```
-6) The user interface for the application may now be opened, in your browser, with the address specified in your terminal.
+6) The user interface for the application may now be opened, in your browser, with the address specified in your terminal. (There is no need to manually create the database. The application does so automatically on start up.)
 
 ## Shutting down the application
 1) In your terminal, shut down the application by pressing <kbd>ctrl</kbd> + <kbd>c</kbd>.
