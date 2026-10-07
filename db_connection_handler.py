@@ -17,7 +17,6 @@ def verify_database():
     
     database = get_connection()
     for table in schema:
-        print(table)
         database.execute(table)    
     database.commit()
     database.close()
