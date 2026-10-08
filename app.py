@@ -72,7 +72,9 @@ def user_page():
 
 @app.route("/new_wine")
 def new_wine():
-    return render_template("new_wine.html")
+    initial_varieties = [""]
+    initial_tags = [""]
+    return render_template("new_wine.html", varieties = initial_varieties, tags = initial_tags)
 
 @app.route("/create_wine", methods=["GET", "POST"])
 def create_wine():
@@ -88,14 +90,10 @@ def create_wine():
 
     this_name = request.form["name"]
 
-    this_main_grape = request.form["main_grape"]
-
     these_varieties = []
     for variety in request.form.getlist("grape"):
         these_varieties.append(variety)
-
-    this_main_tag = request.form["main_type"]
-
+        
     these_tags = []
     for tag in request.form.getlist("type"):
         these_tags.append(tag)
@@ -109,15 +107,15 @@ def create_wine():
     elif action == "+ Add a variety":
         these_varieties.append("")
         # ! ! Change this to a redirect ! !
-        return render_template("new_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name, main_variety = this_main_grape, varieties = these_varieties, main_tag = this_main_tag, tags = these_tags)
+        return render_template("new_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name, varieties = these_varieties, tags = these_tags)
     elif action == "+ Add a type or other tag":
         these_tags.append("")
         # ! ! Change this to a redirect ! !
-        return render_template("new_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name, main_variety = this_main_grape, varieties = these_varieties, main_tag = this_main_tag, tags = these_tags)
+        return render_template("new_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name, varieties = these_varieties, tags = these_tags)
     else:        
         these_subregions.append("")
         # ! ! Change this to a redirect ! !
-        return render_template("new_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name, main_variety = this_main_grape, varieties = these_varieties, main_tag = this_main_tag, tags = these_tags)
+        return render_template("new_wine.html", producer = this_producer, appellation = this_appellation, country = this_country, main_region = this_main_region, subregions = these_subregions, name = this_name, varieties = these_varieties, tags = these_tags)
 
 @app.route("/sign_out", methods=["POST"])
 def sign_out():
